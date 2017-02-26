@@ -27,7 +27,7 @@ class ArrayHasItems extends DiagnosingMatcher {
                     return [true, 'matched'];
                 }
             } else {
-                return [false, 'missing ' . $matcher->toString()];
+                return [false, 'missing key ' . $matcher->toString()];
             }
         }, $this->items, array_keys($this->items));
 
@@ -44,11 +44,15 @@ class ArrayHasItems extends DiagnosingMatcher {
         foreach (array_keys($other) as $key) {
             if (!array_key_exists($key, $this->items)) {
                 $matched = false;
-                $descriptions[$key] = "unexpected";
+                $descriptions[$key] = "unexpected value " . $this->exporter->shortenedExport($other[$key]);
             }
         }
 
-        return [$matched, $this->exporter->export($descriptions)];
+        foreach ($descriptions as $key => &$value) {
+            $value = sprintf("%s => %s", $key, $value);
+        }
+
+        return [$matched, implode("\n", $descriptions)];
     }
 
     /**

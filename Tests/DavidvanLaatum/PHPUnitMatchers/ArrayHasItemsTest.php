@@ -1,12 +1,23 @@
 <?php
 
-namespace DavidvanLaatum\PHPUnitMatchers;
+namespace Tests\DavidvanLaatum\PHPUnitMatchers;
 
+use DavidvanLaatum\PHPUnitMatchers\ArrayHasItems;
 
-class ArrayHasItemsTest extends \PHPUnit_Framework_TestCase {
+/**
+ * @covers \DavidvanLaatum\PHPUnitMatchers\ArrayHasItems
+ */
+class ArrayHasItemsTest extends ConstraintTester {
 
     public function test() {
-        self::assertThat([1,2], new ArrayHasItems([1,2]));
-        self::assertThat([1,2,3], new ArrayHasItems([1,2]));
+        self::assertConstraintMatches(new ArrayHasItems([1, 2]), [1, 2]);
+        self::assertConstraintDoesntMatch(new ArrayHasItems([1, 2]), [1, 2, 3], self::equalTo("0 => matched
+1 => matched
+2 => unexpected value 3"));
+        self::assertConstraintDoesntMatch(new ArrayHasItems([1, 2, 3]), [1, 2], self::equalTo("0 => matched
+1 => matched
+2 => missing key is equal to 3"));
+        self::assertConstraintDoesntMatch(new ArrayHasItems([2, 1]), [1, 2], self::equalTo("0 => failed 1 is equal to 2
+1 => failed 2 is equal to 1"));
     }
 }

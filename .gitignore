@@ -54,6 +54,12 @@ Temporary Items
 .idea/**/gradle.xml
 .idea/**/libraries
 .idea/**/mongoSettings.xml
+.idea/atlassian-ide-plugin.xml
+.idea/checkstyle-idea.xml
+.idea/dbnavigator.xml
+.idea/sonarIssues.xml
+.idea/misc.xml
+.idea/vcs.xml
 *.iws
 /out/
 .idea_modules/
