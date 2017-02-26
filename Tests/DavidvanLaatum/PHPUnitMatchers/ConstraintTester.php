@@ -1,7 +1,11 @@
 <?php
 namespace Tests\DavidvanLaatum\PHPUnitMatchers;
 
+use DavidvanLaatum\PHPUnitMatchers\ExtraMatchers;
+
 class ConstraintTester extends \PHPUnit_Framework_TestCase {
+    use ExtraMatchers;
+
     public static function assertConstraintMatches(\PHPUnit_Framework_Constraint $constraint, $other) {
         self::assertTrue($constraint->evaluate($other, '', true), 'Constraint didn\'t match ' . $constraint->toString());
     }
