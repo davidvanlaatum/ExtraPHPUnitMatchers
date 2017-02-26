@@ -22,12 +22,12 @@ class ArrayHasItems extends DiagnosingMatcher {
         $data = array_map(function (\PHPUnit_Framework_Constraint $matcher, $key) use ($other) {
             if (array_key_exists($key, $other)) {
                 if (!$matcher->evaluate($other[$key], '', true)) {
-                    return [false, $key . ' failed ' . $matcher->failureDescription($other[$key])];
+                    return [false, 'failed ' . $matcher->failureDescription($other[$key])];
                 } else {
                     return [true, 'matched'];
                 }
             } else {
-                return [false, $key . ' missing ' . $matcher->toString()];
+                return [false, 'missing ' . $matcher->toString()];
             }
         }, $this->items, array_keys($this->items));
 
