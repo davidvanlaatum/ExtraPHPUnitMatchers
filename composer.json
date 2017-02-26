@@ -1,0 +1,20 @@
+{
+  "name": "davidvanlaatum/extraphpunitmatchers",
+  "license": "MIT",
+  "type": "library",
+  "description": "Extra PHPUnit Matchers",
+  "autoload": {
+    "psr-4": {
+      "DavidvanLaatum\\PHPUnitMatchers\\": "src/DavidvanLaatum/PHPUnitMatchers"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "Tests/"
+    }
+  },
+  "require": {
+    "php": ">=5.6.8",
+    "phpunit/phpunit": "^5.7"
+  }
+}
