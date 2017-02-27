@@ -22,8 +22,9 @@ class ArrayHasItemsTest extends ConstraintTester {
 2 => missing key is equal to 3"));
         self::assertConstraintDoesntMatch(new ArrayHasItems([2, 1]), [1, 2], self::equalTo("0 => failed 1 is equal to 2
 1 => failed 2 is equal to 1"));
-
         self::assertArrayHasItems([1, 2], [1, 2]);
         self::assertInstanceOf(ArrayHasItems::class, self::arrayHasItems([1, 2]));
+        self::assertEquals('array contains items matching (0 => is equal to 1
+1 => is equal to 2)', self::arrayHasItems([1, 2])->toString());
     }
 }

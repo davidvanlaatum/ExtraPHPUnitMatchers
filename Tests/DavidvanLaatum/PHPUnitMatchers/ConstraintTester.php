@@ -7,7 +7,9 @@ class ConstraintTester extends \PHPUnit_Framework_TestCase {
     use ExtraMatchers;
 
     public static function assertConstraintMatches(\PHPUnit_Framework_Constraint $constraint, $other) {
-        self::assertTrue($constraint->evaluate($other, '', true), 'Constraint didn\'t match ' . $constraint->toString());
+        if (!$constraint->evaluate($other, '', true)) {
+            self::fail('Constraint didn\'t match ' . $constraint->toString());
+        }
     }
 
     public static function assertConstraintDoesntMatch(\PHPUnit_Framework_Constraint $constraint, $other, \PHPUnit_Framework_Constraint $description = null) {
