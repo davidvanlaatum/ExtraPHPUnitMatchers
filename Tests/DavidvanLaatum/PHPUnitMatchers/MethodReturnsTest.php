@@ -25,8 +25,13 @@ class MethodReturnsTest extends ConstraintTester {
             self::assertMethodReturns($this, 'bla', self::anything());
             throw new \InvalidArgumentException('Failed to throw exception');
         } catch (\PHPUnit_Framework_ExpectationFailedException $ex) {
-            self::assertStringStartsWith('Failed asserting that bla() return value is anything got exception ReflectionException(\'Method bla does not exist\') invoking method.
+            if (version_compare('7.0', phpversion()) < 0) {
+                self::assertStringStartsWith('Failed asserting that bla() return value is anything got exception ReflectionException(\'Method bla does not exist\') invoking method.
+ReflectionException: Method bla does not exist in ', $ex->getMessage());
+            } else {
+                self::assertStringStartsWith('Failed asserting that bla() return value is anything got exception ReflectionException(\'Method bla does not exist\') invoking method.
 exception \'ReflectionException\' with message \'Method bla does not exist\' in ', $ex->getMessage());
+            }
         }
     }
 
