@@ -25,4 +25,12 @@ trait ExtraMatchers {
     public static function assertThrowsException(\Closure $func, \PHPUnit_Framework_Constraint $constraint) {
         self::assertThat($func, self::throwsException($constraint));
     }
+
+    public static function methodReturns($method, \PHPUnit_Framework_Constraint $constraint) {
+        return new MethodReturns($method, $constraint);
+    }
+
+    public static function assertMethodReturns($object, $method, \PHPUnit_Framework_Constraint $constraint) {
+        self::assertThat($object, self::methodReturns($method, $constraint));
+    }
 }
