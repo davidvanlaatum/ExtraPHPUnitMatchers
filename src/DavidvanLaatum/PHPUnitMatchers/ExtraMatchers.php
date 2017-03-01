@@ -33,4 +33,8 @@ trait ExtraMatchers {
     public static function assertMethodReturns($object, $method, \PHPUnit_Framework_Constraint $constraint) {
         self::assertThat($object, self::methodReturns($method, $constraint));
     }
+
+    public static function xmlEquals($xml) {
+        return new XMLEquals($xml);
+    }
 }

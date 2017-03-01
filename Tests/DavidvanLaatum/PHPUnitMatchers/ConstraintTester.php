@@ -19,9 +19,13 @@ class ConstraintTester extends \PHPUnit_Framework_TestCase {
         if ($constraint->evaluate($other, '', true)) {
             self::fail('Constraint matched when it shouldn\'t ' . $constraint->toString());
         } else {
-            $method = new \ReflectionMethod($constraint, "failureDescription");
-            $method->setAccessible(true);
-            self::assertThat($method->invoke($constraint, $other), $description);
+            try {
+                $method = new \ReflectionMethod($constraint, 'failureDescription');
+                $method->setAccessible(true);
+                self::assertThat($method->invoke($constraint, $other), $description);
+            } catch(\Exception $ex) {
+                self::fail('Got exception invoking failureDescription: ' . get_class($ex) . ' ' . $ex);
+            }
         }
     }
 }
