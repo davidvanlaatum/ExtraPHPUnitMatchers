@@ -35,7 +35,8 @@ class XMLEquals extends \PHPUnit_Framework_Constraint_IsEqual {
             return parent::failureDescription($other);
             // @codeCoverageIgnoreEnd
         } catch (\PHPUnit_Framework_ExpectationFailedException $ex) {
-            return ($ex->getComparisonFailure() ?: $ex)->toString();
+            $x = ($ex->getComparisonFailure() ? : $ex);
+            return $x->toString();
         }
     }
 
